@@ -346,6 +346,22 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--sol-claro); out
   .cena { width: min(400px, 100%, 27svh); }
   .texto-cartaz { padding-bottom: 32px; }
 }
+
+/* ---------- Topo no desktop: cena à esquerda, texto e CTA à direita ---------- */
+@media (min-width: 861px) {
+  .cartaz {
+    grid-template-columns: auto minmax(0, 1fr); justify-items: stretch; align-items: center;
+    gap: clamp(32px, 5vw, 72px); max-width: 1000px; margin-inline: auto;
+    padding-block: clamp(16px, 4svh, 48px) clamp(40px, 7svh, 72px);
+  }
+  .cena { width: min(460px, 38vw, 62svh); }
+  .texto-cartaz { align-items: flex-start; text-align: left; padding-bottom: 0; gap: 18px; }
+  .texto-cartaz .etiqueta { align-items: flex-start; text-align: left; }
+  .titulo-cartaz { font-size: clamp(3rem, min(6.4vw, 10svh), 6rem); }
+  .bio { max-width: 34ch; font-size: clamp(1.0625rem, 1.5vw, 1.25rem); }
+  .fio { max-width: 420px; }
+  .acoes { align-items: flex-start; }
+}
 </style>
 </head>
 <body>
