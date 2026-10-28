@@ -362,6 +362,66 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--sol-claro); out
   .fio { max-width: 420px; }
   .acoes { align-items: flex-start; }
 }
+
+/* ---------- Animações ---------- */
+@media (prefers-reduced-motion: no-preference) {
+  /* Entrada do topo: o sol se põe, a foto sobe e o texto chega em sequência */
+  @keyframes subir { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+  @keyframes surgir-foto { from { opacity: 0; transform: translate(-50%, 24px) scale(.94); } to { opacity: 1; transform: translateX(-50%); } }
+  @keyframes riscar { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+  @keyframes onda { 0%, 70%, 100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--sol) 55%, transparent); } 85% { box-shadow: 0 0 0 12px color-mix(in srgb, var(--sol) 0%, transparent); } }
+  @keyframes balanco { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+
+  .cena .retrato { animation: surgir-foto .9s .35s cubic-bezier(.2,.7,.2,1) both; }
+  .texto-cartaz > * { animation: subir .7s cubic-bezier(.2,.7,.2,1) both; }
+  .texto-cartaz > :nth-child(1) { animation-delay: .15s; }
+  .texto-cartaz > :nth-child(2) { animation-delay: .25s; }
+  .texto-cartaz > .fio { animation: riscar .8s .5s cubic-bezier(.6,0,.2,1) both; transform-origin: left; }
+  .texto-cartaz > :nth-child(4) { animation-delay: .6s; }
+  .texto-cartaz > :nth-child(5) { animation-delay: .75s; }
+  @media (max-width: 860px) { .texto-cartaz > .fio { transform-origin: center; } }
+
+  /* Botão do WhatsApp chama atenção de vez em quando */
+  .topo .botao { animation: onda 4s 2s ease-out infinite; }
+
+  /* Cards respondem ao passar o mouse */
+  .frente, .projeto, .passos li.passo { transition: transform .25s ease, box-shadow .25s ease; }
+  .frente:hover, .passos li.passo:hover { transform: translateY(-4px); }
+  .projeto:hover { transform: translateY(-6px); box-shadow: 0 10px 0 -2px var(--petroleo-950); }
+  .lista li { transition: background .2s ease; }
+  .lista li:hover .preco { color: var(--sol); }
+  .combo { transition: transform .25s ease; }
+  .combo:hover { transform: scale(1.015); }
+  .passos .n { display: inline-block; transition: transform .25s ease; }
+  .passos li.passo:hover .n { transform: rotate(-8deg) scale(1.1); }
+  .redes a { transition: border-color .15s ease, transform .15s ease; }
+  .redes a:hover { transform: translateY(-2px); }
+
+  /* Previews dos projetos ganham vida */
+  .m-grade i.on { animation: subir .4s both; }
+  .m-grade i:nth-child(3n).on { animation-delay: .1s; }
+  .m-grade i:nth-child(3n+1).on { animation-delay: .2s; }
+  .preview-sinapse circle { transform-origin: 160px 110px; animation: pulsar 2.4s ease-in-out infinite; }
+  @keyframes pulsar { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.08); } }
+  .preview-sinapse g[stroke="#45656C"] path { stroke-dasharray: 6 6; animation: fluxo 1.2s linear infinite; }
+  @keyframes fluxo { to { stroke-dashoffset: -12; } }
+  .g-grade i { transition: transform .25s ease; }
+  .projeto:hover .g-grade i { transform: translateY(-4px) rotate(-2deg); }
+  .projeto:hover .g-grade div:nth-child(even) i { transform: translateY(-4px) rotate(2deg); }
+
+  /* Ao rolar, cada bloco entra suavemente (só onde o navegador suporta; nos outros fica parado e visível) */
+  @supports (animation-timeline: view()) {
+    @keyframes aparecer { from { opacity: .15; transform: translateY(28px); } to { opacity: 1; transform: none; } }
+    .servicos .cabeca, .frente, .como .cabeca, .passos li.passo, .selos, .lado-b-foto, .lado-b h2, .projeto, .rodape-cta {
+      animation: aparecer linear both; animation-timeline: view(); animation-range: entry 0% entry 70%;
+    }
+    @keyframes tracejar { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+    .passos::before { animation: tracejar linear both; animation-timeline: view(); animation-range: entry 20% cover 45%; }
+  }
+
+  /* A foto do Lado B flutua de leve */
+  .lado-b-foto img { animation: balanco 6s ease-in-out infinite; transform-origin: center; }
+}
 </style>
 </head>
 <body>
