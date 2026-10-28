@@ -1,0 +1,583 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#13404C">
+<meta property="og:type" content="website">
+<title>O Gui Resolve</title>
+<meta name="description" content="Manutenção de notebook e serviços digitais em Fortaleza. Atendimento com cuidado, transparência e garantia.">
+<meta property="og:title" content="O Gui Resolve">
+<meta property="og:description" content="Notebook lento, sem espaço ou com defeito? Eu resolvo! Atendimento com cuidado, transparência e garantia.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2313404C'/%3E%3Ccircle cx='32' cy='34' r='20' fill='%23D1652A'/%3E%3Crect x='8' y='36' width='48' height='3' fill='%2313404C'/%3E%3Crect x='8' y='42' width='48' height='4' fill='%2313404C'/%3E%3Crect x='8' y='49' width='48' height='15' fill='%2313404C'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap">
+<style>
+/* Pôster de oficina em Fortaleza: o serviço inteiro no petróleo, a praia "vira" a página para a areia e aparece o Lado B. Tema único, de propósito. */
+:root {
+  --petroleo-950: #08333D;
+  --petroleo-900: #13404C;
+  --petroleo-700: #1F5562;
+  --petroleo-500: #45656C;
+  --petroleo-300: #8DB3B4;
+  --areia: #F5ECDC;
+  --areia-funda: #EADCC4;
+  --sol: #D1652A;
+  --sol-700: #A84A19;
+  --sol-claro: #F0A86E;
+  --grafite: #2E3538;
+  --fonte: "Poppins", "Montserrat", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --raio-card: 32px;
+  --raio-icone: 16px;
+  --gutter-l: max(16px, env(safe-area-inset-left, 0px));
+  --gutter-r: max(16px, env(safe-area-inset-right, 0px));
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { background: var(--petroleo-900); }
+body {
+  margin: 0;
+  background: var(--petroleo-900);
+  color: var(--areia);
+  font-family: var(--fonte);
+  font-size: 1.0625rem;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; }
+a:focus-visible, button:focus-visible { outline: 3px solid var(--sol-claro); outline-offset: 3px; border-radius: 8px; }
+.faixa { padding-left: var(--gutter-l); padding-right: var(--gutter-r); }
+.miolo { max-width: 1120px; margin-inline: auto; }
+
+.etiqueta {
+  font-size: .8125rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+  display: flex; flex-direction: column; gap: 10px; margin: 0;
+}
+.etiqueta::after { content: ""; width: 48px; height: 4px; background: var(--sol); border-radius: 2px; }
+.ponto { color: var(--sol); }
+
+/* ---------- Topo ---------- */
+.topo { padding-block: 28px 0; overflow: hidden; }
+.barra { display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+.marca-mini { display: flex; align-items: center; gap: 10px; font-weight: 700; text-decoration: none; }
+.marca-mini svg { width: 28px; height: 28px; }
+.barra nav { display: flex; gap: 22px; font-size: .9375rem; font-weight: 500; color: var(--petroleo-300); }
+.barra nav a { text-decoration: none; }
+.barra nav a:hover { color: var(--areia); }
+
+.cartaz {
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+  gap: 48px; align-items: end; padding-top: 40px;
+}
+.cena { position: relative; aspect-ratio: 1 / 1; max-width: 100%; }
+.cena svg.ceu { position: absolute; inset: 0; width: 100%; height: 100%; }
+.cena .retrato {
+  position: absolute; left: 6%; bottom: -2%; width: 62%; aspect-ratio: 1; border-radius: 50%;
+  border: 8px solid var(--petroleo-900); overflow: hidden; background: #0B536C;
+}
+.cena .retrato img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.sol-se-pondo { transform-origin: center; animation: pondo 1.6s cubic-bezier(.2,.7,.2,1) both; }
+@keyframes pondo { from { transform: translateY(-26px); } to { transform: none; } }
+
+.texto-cartaz { padding-bottom: 72px; display: flex; flex-direction: column; gap: 22px; min-width: 0; }
+.texto-cartaz .etiqueta { color: var(--areia); }
+.titulo-cartaz {
+  margin: 0; font-weight: 800; letter-spacing: -.03em; line-height: .95;
+  font-size: clamp(3.4rem, 8.4vw, 6.6rem);
+}
+.titulo-cartaz span { display: block; }
+.titulo-cartaz .grande { font-size: 1.32em; }
+.fio { width: 100%; max-width: 440px; height: 4px; background: var(--sol); border: 0; margin: 0; border-radius: 2px; }
+.bio { margin: 0; font-size: clamp(1.125rem, 2vw, 1.3rem); font-weight: 500; max-width: 30ch; text-wrap: balance; }
+.acoes { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 22px; }
+.botao {
+  display: inline-flex; align-items: center; gap: 12px;
+  background: var(--sol); color: var(--areia); text-decoration: none;
+  font-weight: 700; font-size: 1.0625rem; padding: 16px 28px; border-radius: 999px;
+  transition: transform .15s ease, background .15s ease;
+}
+.botao:hover { background: #DC6F33; transform: translateY(-2px); }
+.botao svg { width: 22px; height: 22px; flex: none; }
+.acoes small { color: var(--petroleo-300); font-size: .9375rem; }
+
+/* ---------- Serviços ---------- */
+.servicos { padding-block: 88px 72px; background: var(--petroleo-900); }
+.cabeca { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 20px 40px; margin-bottom: 40px; }
+.cabeca h2 { margin: 12px 0 0; font-weight: 800; font-size: clamp(2.2rem, 5vw, 3.4rem); line-height: 1; letter-spacing: -.025em; text-wrap: balance; }
+.cabeca p { margin: 0; max-width: 36ch; color: var(--petroleo-300); }
+
+.frentes { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 24px; align-items: start; }
+.coluna-dir { display: grid; gap: 24px; }
+.frente {
+  background: var(--areia); color: var(--petroleo-950); border-radius: var(--raio-card);
+  padding: 28px 28px 12px;
+}
+.frente-topo { display: flex; align-items: center; gap: 14px; margin-bottom: 6px; }
+.frente-topo svg { width: 44px; height: 44px; flex: none; }
+.frente h3 { margin: 0; font-size: .8125rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--sol-700); }
+.lista { list-style: none; margin: 0; padding: 0; }
+.lista li {
+  display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 20px; align-items: baseline;
+  padding: 16px 0; border-top: 1.5px solid color-mix(in srgb, var(--petroleo-300) 55%, transparent);
+}
+.lista li:first-child { border-top: 0; }
+.nome { font-weight: 700; font-size: 1.0625rem; line-height: 1.3; }
+.preco { font-weight: 800; font-size: 1.375rem; color: var(--sol-700); white-space: nowrap; text-align: right; font-variant-numeric: tabular-nums; letter-spacing: -.01em; }
+.preco .de { font-size: .75rem; font-weight: 600; letter-spacing: .02em; color: var(--petroleo-500); margin-right: 6px; }
+.desc { grid-column: 1 / -1; color: var(--petroleo-500); font-size: .9375rem; line-height: 1.45; }
+.desc b { color: var(--sol-700); font-weight: 600; }
+
+.combo {
+  margin: 8px -12px 16px; background: var(--sol); color: var(--areia);
+  border-radius: 24px; padding: 22px 24px;
+  display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 20px; align-items: baseline;
+}
+.combo .rotulo { grid-column: 1 / -1; font-size: .75rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; opacity: .9; }
+.combo .nome { font-size: 1.375rem; font-weight: 800; letter-spacing: -.01em; }
+.combo .preco { color: var(--areia); font-size: 2rem; }
+.combo .desc { color: var(--areia); opacity: .92; }
+
+/* ---------- Como funciona ---------- */
+.como { padding-block: 24px 120px; }
+.passos { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; counter-reset: p; }
+.passos li { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 4px 18px; align-items: start; }
+.passos .n { grid-row: span 2; font-weight: 800; font-size: 3.4rem; line-height: .9; color: var(--sol); letter-spacing: -.04em; }
+.passos strong { font-weight: 700; font-size: 1.125rem; line-height: 1.3; padding-top: 4px; }
+.passos span:last-child { color: var(--petroleo-300); font-size: .9375rem; }
+.garantia { margin: 40px 0 0; display: flex; flex-wrap: wrap; gap: 10px 28px; color: var(--petroleo-300); font-size: .9375rem; }
+.garantia span { display: inline-flex; align-items: center; gap: 8px; }
+.garantia span::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--sol); }
+
+/* ---------- A virada ---------- */
+.virada { display: block; width: 100%; height: clamp(70px, 10vw, 140px); background: var(--petroleo-900); }
+
+/* ---------- Lado B ---------- */
+.lado-b { background: var(--areia); color: var(--petroleo-950); padding-block: 24px 112px; }
+.lado-b .etiqueta { color: var(--sol-700); }
+.lado-b-grade { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr); gap: 56px; align-items: start; }
+.lado-b-foto { border-radius: var(--raio-card); overflow: hidden; aspect-ratio: 1; max-width: 100%; border: 6px solid var(--grafite); background: var(--grafite); }
+.lado-b-foto img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.lado-b-legenda { margin: 14px 4px 0; font-size: .875rem; color: var(--petroleo-500); }
+.lado-b h2 { margin: 14px 0 18px; font-weight: 800; font-size: clamp(2rem, 4.6vw, 3.25rem); line-height: 1; letter-spacing: -.025em; text-wrap: balance; }
+.lado-b-intro { margin: 0 0 36px; max-width: 52ch; color: var(--petroleo-500); }
+.projetos { list-style: none; margin: 0; padding: 0; border-top: 2px solid var(--petroleo-950); }
+.projeto { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 6px 24px; padding: 22px 0; border-bottom: 1.5px solid color-mix(in srgb, var(--petroleo-500) 35%, transparent); align-items: baseline; }
+.projeto h3 { margin: 0; font-size: 1.375rem; font-weight: 700; letter-spacing: -.01em; }
+.projeto p { grid-column: 1; margin: 0; color: var(--petroleo-500); font-size: .9875rem; }
+.projeto .tags { grid-column: 1; display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+.projeto .tags span { font-size: .75rem; font-weight: 600; padding: 3px 10px; border-radius: 999px; background: var(--areia-funda); color: var(--petroleo-950); }
+.projeto .ir { grid-row: 1; grid-column: 2; font-weight: 600; font-size: .9375rem; color: var(--sol-700); text-decoration: none; white-space: nowrap; }
+.projeto a.ir:hover { text-decoration: underline; text-underline-offset: 4px; }
+.projeto .privado { color: var(--petroleo-500); font-weight: 500; }
+.github { margin-top: 28px; display: inline-flex; align-items: center; gap: 10px; font-weight: 600; text-decoration: none; padding: 12px 20px; border: 2px solid var(--petroleo-950); border-radius: 999px; transition: background .15s ease, color .15s ease; }
+.github:hover { background: var(--petroleo-950); color: var(--areia); }
+.github svg { width: 20px; height: 20px; }
+
+/* ---------- Rodapé ---------- */
+.rodape { background: var(--petroleo-950); padding-block: 72px 48px; }
+.rodape-cta { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 24px; }
+.rodape-cta h2 { margin: 0; font-size: clamp(1.9rem, 4.4vw, 3rem); font-weight: 800; line-height: 1; letter-spacing: -.025em; }
+.contatos { display: flex; flex-wrap: wrap; gap: 12px 28px; margin-top: 40px; color: var(--petroleo-300); font-size: .9375rem; }
+.contatos a { text-decoration: none; color: var(--areia); font-weight: 500; }
+.contatos a:hover { color: var(--sol-claro); }
+.assinatura { margin: 64px 0 0; display: flex; align-items: center; justify-content: center; gap: 18px; font-weight: 600; }
+.assinatura::before, .assinatura::after { content: ""; width: 72px; height: 4px; background: var(--sol); border-radius: 2px; }
+.feito { margin: 12px 0 0; text-align: center; font-size: .8125rem; color: var(--petroleo-300); }
+
+/* ---------- Responsivo ---------- */
+@media (max-width: 860px) {
+  .barra nav { display: none; }
+  .cartaz { grid-template-columns: minmax(0, 1fr); gap: 8px; padding-top: 16px; }
+  .cena { max-width: 460px; width: 100%; margin-inline: auto; order: 2; }
+  .texto-cartaz { padding-bottom: 8px; }
+  .frentes, .lado-b-grade { grid-template-columns: minmax(0, 1fr); }
+  .lado-b-grade { gap: 36px; }
+  .lado-b-foto { max-width: 360px; }
+  .passos { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+}
+@media (max-width: 420px) {
+  .frente { padding: 22px 20px 8px; }
+  .combo { margin-inline: -8px; padding: 20px; }
+  .projeto { grid-template-columns: minmax(0, 1fr); }
+  .projeto .ir { grid-row: auto; grid-column: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sol-se-pondo { animation: none; }
+  .botao, .github { transition: none; }
+  .botao:hover { transform: none; }
+}
+
+/* ---------- Composição centralizada ---------- */
+.etiqueta { align-items: center; text-align: center; }
+.cartaz { grid-template-columns: minmax(0, 1fr); justify-items: center; gap: 36px; padding-top: 32px; }
+.cena { width: min(440px, 100%); order: 0; }
+.cena .retrato { left: 50%; transform: translateX(-50%); width: 54%; bottom: -6%; }
+.texto-cartaz { align-items: center; text-align: center; gap: 24px; padding-bottom: 96px; }
+.fio { max-width: 360px; }
+.bio { max-width: 36ch; }
+.acoes { flex-direction: column; justify-content: center; }
+.cabeca { flex-direction: column; align-items: center; text-align: center; gap: 18px; margin-bottom: 48px; }
+.cabeca p { max-width: 46ch; }
+.frentes { max-width: 1040px; margin-inline: auto; }
+.passos { max-width: 980px; margin-inline: auto; gap: 40px; }
+.passos li { grid-template-columns: minmax(0, 1fr); justify-items: center; text-align: center; gap: 8px; }
+.passos .n { grid-row: auto; }
+.passos strong { padding-top: 0; }
+.garantia { justify-content: center; text-align: center; }
+.lado-b-grade { grid-template-columns: minmax(0, 1fr); justify-items: center; text-align: center; max-width: 760px; gap: 40px; }
+.lado-b-foto { width: min(300px, 100%); margin-inline: auto; }
+.lado-b-legenda { text-align: center; }
+.lado-b-intro { margin-inline: auto; }
+.projetos { width: 100%; }
+.projeto { grid-template-columns: minmax(0, 1fr); justify-items: center; text-align: center; gap: 8px; }
+.projeto h3, .projeto p, .projeto .tags, .projeto .ir { grid-column: 1; grid-row: auto; }
+.projeto p { max-width: 48ch; }
+.projeto .tags { justify-content: center; margin-top: 4px; }
+.rodape-cta { flex-direction: column; text-align: center; gap: 28px; }
+.contatos { justify-content: center; text-align: center; }
+@media (prefers-reduced-motion: reduce) { .sol-se-pondo { animation: none; } }
+/* ---------- Como funciona, cards ---------- */
+.como .cabeca p { color: var(--petroleo-300); }
+.passos { position: relative; gap: 24px; }
+.passos li.passo {
+  display: flex; flex-direction: column; align-items: center; text-align: center; gap: 10px;
+  background: var(--petroleo-950); border-radius: var(--raio-card); padding: 32px 24px 30px;
+  position: relative; z-index: 1;
+}
+.passo-topo { display: flex; align-items: center; gap: 14px; margin-bottom: 6px; }
+.passo-topo svg { width: 56px; height: 56px; }
+.passos .n { font-size: 3rem; }
+.passos .passo strong { font-size: 1.1875rem; }
+.passos .passo span:last-child { max-width: 28ch; }
+@media (min-width: 861px) {
+  .passos::before { content: ""; position: absolute; left: 12%; right: 12%; top: 62px; border-top: 3px dashed var(--sol); z-index: 0; }
+}
+.selos { list-style: none; margin: 32px auto 0; padding: 22px 24px; max-width: 980px;
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px;
+  border: 2px solid var(--petroleo-700); border-radius: var(--raio-card); }
+.selos li { display: flex; align-items: center; justify-content: center; gap: 12px; color: var(--sol-claro); }
+.selos svg { width: 28px; height: 28px; flex: none; }
+.selos span { display: flex; flex-direction: column; text-align: left; color: var(--petroleo-300); font-size: .9375rem; line-height: 1.3; }
+.selos b { color: var(--areia); font-weight: 700; font-size: 1rem; }
+@media (max-width: 860px) { .selos { grid-template-columns: minmax(0, 1fr); } .selos li { justify-content: flex-start; } }
+
+/* ---------- Projetos com preview ---------- */
+.lado-b-grade { max-width: 1120px; }
+.lado-b-grade > div { width: 100%; }
+.projetos { border-top: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; text-align: left; }
+.projeto { display: flex; flex-direction: column; align-items: stretch; padding: 0; border: 2px solid var(--petroleo-950); border-radius: var(--raio-card); overflow: hidden; background: #FBF5EA; text-align: left; }
+.preview { aspect-ratio: 4 / 3; width: 100%; max-width: 100%; display: grid; place-items: center; overflow: hidden; border-bottom: 2px solid var(--petroleo-950); }
+.projeto-corpo { padding: 20px 22px 24px; display: flex; flex-direction: column; align-items: flex-start; gap: 8px; flex: 1; }
+.projeto-corpo .tags { justify-content: flex-start; }
+.projeto-corpo .ir { margin-top: auto; padding-top: 8px; }
+.projeto p { max-width: none; }
+
+.preview-mono { background: #E6E6E6; align-items: end; }
+.preview-mono .tela { width: 54%; height: 86%; background: #111; border-radius: 22px 22px 0 0; padding: 16px 14px; display: flex; flex-direction: column; gap: 8px; color: #F2F2F2; font-size: .6875rem; }
+.m-topo { display: flex; justify-content: space-between; align-items: baseline; }
+.m-topo b { font-size: .9375rem; font-weight: 700; }
+.m-topo span { color: #8A8A8A; }
+.m-hab { display: flex; align-items: center; gap: 8px; padding: 6px 8px; border: 1px solid #333; border-radius: 10px; color: #BDBDBD; }
+.m-hab i { width: 12px; height: 12px; border-radius: 50%; border: 1.5px solid #F2F2F2; flex: none; }
+.m-hab.feito { color: #F2F2F2; }
+.m-hab.feito i { background: #F2F2F2; }
+.m-grade { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; margin-top: 4px; }
+.m-grade i { aspect-ratio: 1; border-radius: 3px; background: #2A2A2A; }
+.m-grade i.on { background: #F2F2F2; }
+
+.preview-sinapse { background: var(--petroleo-950); }
+.preview-sinapse svg { width: 92%; height: auto; }
+
+.preview-guivros { background: var(--areia-funda); }
+.janela { width: 86%; background: #FFFFFF; border-radius: 14px; padding: 14px; box-shadow: 0 0 0 1.5px var(--petroleo-950); color: #222; }
+.g-topo { display: flex; flex-direction: column; margin-bottom: 10px; }
+.g-topo b { font-size: .875rem; font-weight: 800; }
+.g-topo span { font-size: .6875rem; color: #777; }
+.g-grade { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+.g-grade div { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+.g-grade i { aspect-ratio: 2 / 3; border-radius: 4px; }
+.g-grade b { font-size: .5625rem; font-weight: 600; line-height: 1.2; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.g-grade span { font-size: .5625rem; color: #A84A19; font-weight: 700; }
+@media (max-width: 860px) { .projetos { grid-template-columns: minmax(0, 1fr); max-width: 440px; margin-inline: auto; } }
+
+/* ---------- Rodapé com redes ---------- */
+.redes { list-style: none; margin: 40px 0 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
+.redes a { display: inline-flex; align-items: center; gap: 10px; padding: 8px 18px 8px 8px; border-radius: 999px; border: 2px solid var(--petroleo-700); text-decoration: none; font-weight: 600; font-size: .9375rem; transition: border-color .15s ease; }
+.redes a:hover { border-color: var(--sol); }
+.redes svg { width: 36px; height: 36px; padding: 8px; border-radius: 50%; background: var(--sol); color: var(--areia); }
+.local { margin: 20px 0 0; text-align: center; color: var(--petroleo-300); font-size: .9375rem; }
+.feito a { color: var(--areia); text-decoration: none; font-weight: 600; }
+.feito a:hover { color: var(--sol-claro); }
+
+</style>
+</head>
+<body>
+<header class="topo faixa">
+  <div class="miolo">
+    <div class="barra">
+      <a class="marca-mini" href="#inicio" aria-label="O Gui Resolve, início">
+        <svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="26" fill="#D1652A"/><rect x="2" y="34" width="60" height="3.5" fill="#13404C"/><rect x="2" y="41" width="60" height="5" fill="#13404C"/><rect x="2" y="50" width="60" height="14" fill="#13404C"/></svg>
+        <span>O Gui Resolve</span>
+      </a>
+      <nav aria-label="Seções">
+        <a href="#servicos">Serviços</a>
+        <a href="#como">Como funciona</a>
+        <a href="#lado-b">Lado B</a>
+      </nav>
+    </div>
+
+    <div class="cartaz" id="inicio">
+      <div class="cena" aria-hidden="true">
+        <svg class="ceu" viewBox="0 0 600 600">
+          <defs><clipPath id="selo"><circle cx="300" cy="300" r="300"/></clipPath></defs>
+          <g clip-path="url(#selo)">
+            <rect width="600" height="600" fill="#1F5562" opacity=".35"/>
+            <g class="sol-se-pondo"><circle cx="300" cy="320" r="210" fill="#D1652A"/></g>
+            <rect x="0" y="330" width="600" height="9" fill="#13404C"/>
+            <rect x="0" y="360" width="600" height="15" fill="#13404C"/>
+            <rect x="0" y="398" width="600" height="22" fill="#13404C"/>
+            <g fill="#1F5562"><rect x="18" y="430" width="30" height="170"/><rect x="52" y="404" width="36" height="196"/><rect x="92" y="440" width="26" height="160"/><rect x="122" y="392" width="40" height="208"/><rect x="166" y="420" width="28" height="180"/><rect x="404" y="420" width="28" height="180"/><rect x="436" y="392" width="40" height="208"/><rect x="480" y="440" width="26" height="160"/><rect x="510" y="404" width="36" height="196"/><rect x="550" y="430" width="32" height="170"/></g>
+            <g fill="#13404C" opacity=".55"><rect x="26" y="444" width="6" height="8"/><rect x="34" y="444" width="6" height="8"/><rect x="26" y="462" width="6" height="8"/><rect x="34" y="462" width="6" height="8"/><rect x="26" y="480" width="6" height="8"/><rect x="34" y="480" width="6" height="8"/><rect x="60" y="418" width="6" height="8"/><rect x="74" y="418" width="6" height="8"/><rect x="60" y="436" width="6" height="8"/><rect x="74" y="436" width="6" height="8"/><rect x="60" y="454" width="6" height="8"/><rect x="74" y="454" width="6" height="8"/><rect x="130" y="406" width="6" height="8"/><rect x="148" y="406" width="6" height="8"/><rect x="130" y="424" width="6" height="8"/><rect x="148" y="424" width="6" height="8"/><rect x="130" y="442" width="6" height="8"/><rect x="148" y="442" width="6" height="8"/><rect x="444" y="406" width="6" height="8"/><rect x="462" y="406" width="6" height="8"/><rect x="444" y="424" width="6" height="8"/><rect x="462" y="424" width="6" height="8"/><rect x="444" y="442" width="6" height="8"/><rect x="462" y="442" width="6" height="8"/><rect x="518" y="418" width="6" height="8"/><rect x="532" y="418" width="6" height="8"/><rect x="518" y="436" width="6" height="8"/><rect x="532" y="436" width="6" height="8"/><rect x="518" y="454" width="6" height="8"/><rect x="532" y="454" width="6" height="8"/><rect x="558" y="444" width="6" height="8"/><rect x="568" y="444" width="6" height="8"/><rect x="558" y="462" width="6" height="8"/><rect x="568" y="462" width="6" height="8"/><rect x="558" y="480" width="6" height="8"/><rect x="568" y="480" width="6" height="8"/></g>
+            <path d="M0 540 Q 300 470 600 540 L600 600 L0 600 Z" fill="#F5ECDC"/>
+            <path d="M0 556 Q 300 488 600 556" fill="none" stroke="#8DB3B4" stroke-width="3" opacity=".7"/>
+          </g>
+        </svg>
+        <div class="retrato"><img src="assets/gui-sorriso.webp" alt="" width="720" height="720"></div>
+      </div>
+
+      <div class="texto-cartaz">
+        <p class="etiqueta">Fortaleza · CE</p>
+        <h1 class="titulo-cartaz"><span>O Gui</span><span class="grande">Resolve<span class="ponto" style="display:inline">.</span></span></h1>
+        <hr class="fio">
+        <p class="bio">Notebook lento, sem espaço ou com defeito? Eu resolvo! Atendimento com cuidado, transparência e garantia.</p>
+        <div class="acoes">
+          <a class="botao js-whats" href="#contato" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.2a9.8 9.8 0 0 0-8.4 14.8L2.2 21.8l4.9-1.3A9.8 9.8 0 1 0 12 2.2Zm0 17.8a8 8 0 0 1-4.1-1.1l-.3-.2-2.9.8.8-2.8-.2-.3A8 8 0 1 1 12 20Zm4.4-6c-.2-.1-1.4-.7-1.7-.8-.2-.1-.4-.1-.5.1l-.8.9c-.1.2-.3.2-.5.1a6.6 6.6 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.1 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.5-.4h-.5a.9.9 0 0 0-.6.3 2.7 2.7 0 0 0-.9 2c0 1.2.9 2.3 1 2.5.1.2 1.7 2.6 4.2 3.7 1.6.7 2.2.7 3 .6.5-.1 1.4-.6 1.6-1.2.2-.6.2-1 .1-1.2l-.5-.2Z"/></svg>
+            Chamar no WhatsApp
+          </a>
+          <small>Diagnóstico grátis se você fechar.</small>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="servicos faixa" id="servicos" aria-labelledby="t-servicos">
+    <div class="miolo">
+      <div class="cabeca">
+        <div>
+          <p class="etiqueta">Serviços e preços</p>
+          <h2 id="t-servicos">Quanto custa<span class="ponto">.</span></h2>
+        </div>
+        <p>O preço que está aqui é o que você paga. Se precisar de peça, eu te digo quanto custa antes de comprar.</p>
+      </div>
+
+      <div class="frentes">
+        <article class="frente">
+          <div class="frente-topo">
+            <svg viewBox="0 0 48 48" aria-hidden="true"><rect x="2" y="2" width="44" height="44" rx="14" fill="#13404C"/><rect x="11" y="13" width="26" height="17" rx="3" fill="none" stroke="#F5ECDC" stroke-width="3"/><path d="M8 34h32" stroke="#F5ECDC" stroke-width="3" stroke-linecap="round"/><circle cx="24" cy="22" r="4" fill="#D1652A"/></svg>
+            <h3>Notebook</h3>
+          </div>
+          <ul class="lista">
+            <li><span class="nome">Diagnóstico</span><span class="preco">Grátis</span><span class="desc">se você fechar o serviço. Se não fechar, <b>R$ 40</b>.</span></li>
+          </ul>
+          <div class="combo">
+            <span class="rotulo">Combo</span>
+            <span class="nome">Notebook novo de novo</span>
+            <span class="preco">R$ 260</span>
+            <span class="desc">SSD + limpeza + otimização, + peça. Separados saem por R$ 360.</span>
+          </div>
+          <ul class="lista">
+            <li><span class="nome">Otimização</span><span class="preco">R$ 80</span><span class="desc">Deixo leve sem formatar e sem apagar nada.</span></li>
+            <li><span class="nome">Formatação completa</span><span class="preco">R$ 130</span><span class="desc">Windows original, drivers e os seus programas de volta.</span></li>
+            <li><span class="nome">Limpeza interna</span><span class="preco">R$ 130</span><span class="desc">Cooler limpo e pasta térmica nova. Para de esquentar.</span></li>
+            <li><span class="nome">Upgrade de SSD</span><span class="preco">R$ 150</span><span class="desc">Liga em segundos e você não perde nada. <b>+ peça</b></span></li>
+            <li><span class="nome">Instalação de programas</span><span class="preco">R$ 50</span><span class="desc">Até 5 programas, instalados e configurados.</span></li>
+          </ul>
+        </article>
+
+        <div class="coluna-dir">
+          <article class="frente">
+            <div class="frente-topo">
+              <svg viewBox="0 0 48 48" aria-hidden="true"><rect x="2" y="2" width="44" height="44" rx="14" fill="#13404C"/><rect x="14" y="22" width="20" height="15" rx="3" fill="#F5ECDC"/><path d="M18 22v-4a6 6 0 0 1 12 0v4" fill="none" stroke="#F5ECDC" stroke-width="3"/><circle cx="24" cy="29" r="2.5" fill="#D1652A"/></svg>
+              <h3>Contas</h3>
+            </div>
+            <ul class="lista">
+              <li><span class="nome">Segurança de contas</span><span class="preco">R$ 80</span><span class="desc">Verificação em duas etapas e senhas fortes, por pessoa.</span></li>
+              <li><span class="nome">Recuperação de conta</span><span class="preco">R$ 100</span><span class="desc">Você só paga <b>se eu recuperar</b>.</span></li>
+            </ul>
+          </article>
+
+          <article class="frente">
+            <div class="frente-topo">
+              <svg viewBox="0 0 48 48" aria-hidden="true"><rect x="2" y="2" width="44" height="44" rx="14" fill="#13404C"/><rect x="16" y="9" width="16" height="30" rx="4" fill="none" stroke="#F5ECDC" stroke-width="3"/><path d="M20 17h8M20 22h8" stroke="#F5ECDC" stroke-width="2.5" stroke-linecap="round"/><rect x="20" y="27" width="8" height="5" rx="2" fill="#D1652A"/></svg>
+              <h3>Páginas digitais</h3>
+            </div>
+            <ul class="lista">
+              <li><span class="nome">Cartão de visita digital</span><span class="preco">R$ 120</span><span class="desc">Uma página com seus contatos e um QR code. Pronto em até 2 dias.</span></li>
+              <li><span class="nome">Convite digital</span><span class="preco"><span class="de">a partir de</span>R$ 150</span><span class="desc">Uma página com contagem regressiva e o mapa do local.</span></li>
+              <li><span class="nome">Página de empresa</span><span class="preco"><span class="de">a partir de</span>R$ 350</span><span class="desc">Uma página como esta, com seus serviços e botão de WhatsApp.</span></li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="como faixa" id="como" aria-labelledby="t-como">
+    <div class="miolo">
+      <div class="cabeca">
+        <div>
+          <p class="etiqueta">Como funciona</p>
+          <h2 id="t-como">Sem surpresa<span class="ponto">.</span></h2>
+        </div>
+        <p>Do primeiro "oi" no WhatsApp até o notebook de volta na sua mão, em três passos.</p>
+      </div>
+      <ol class="passos">
+        <li class="passo">
+          <div class="passo-topo"><span class="n">1</span>
+            <svg viewBox="0 0 56 56" aria-hidden="true"><rect width="56" height="56" rx="16" fill="#1F5562"/><rect x="12" y="16" width="32" height="20" rx="3" fill="none" stroke="#F5ECDC" stroke-width="3"/><path d="M8 40h40" stroke="#F5ECDC" stroke-width="3" stroke-linecap="round"/><path d="M24 26h8m-3-3 3 3-3 3" stroke="#D1652A" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <strong>Você me entrega o notebook</strong>
+          <span>Combinamos pelo WhatsApp o melhor horário e local.</span>
+        </li>
+        <li class="passo">
+          <div class="passo-topo"><span class="n">2</span>
+            <svg viewBox="0 0 56 56" aria-hidden="true"><rect width="56" height="56" rx="16" fill="#1F5562"/><circle cx="25" cy="25" r="10" fill="none" stroke="#F5ECDC" stroke-width="3"/><path d="m32 32 9 9" stroke="#F5ECDC" stroke-width="4" stroke-linecap="round"/><path d="m20 25 4 4 6-7" stroke="#D1652A" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <strong>Diagnóstico e preço fechado</strong>
+          <span>Eu te digo o que tem e quanto custa. Só mexo depois que você aprova.</span>
+        </li>
+        <li class="passo">
+          <div class="passo-topo"><span class="n">3</span>
+            <svg viewBox="0 0 56 56" aria-hidden="true"><rect width="56" height="56" rx="16" fill="#1F5562"/><rect x="18" y="10" width="20" height="36" rx="4" fill="none" stroke="#F5ECDC" stroke-width="3"/><path d="m22 28 4 4 8-9" stroke="#D1652A" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <strong>Pix só na entrega</strong>
+          <span>Você testa, confere que ficou bom e só então paga.</span>
+        </li>
+      </ol>
+      <ul class="selos">
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="3" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3 10h18M8 3v4M16 3v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span><b>1 a 3 dias</b>para ficar pronto</span></li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 4 6v6c0 4.5 3.4 8 8 9 4.6-1 8-4.5 8-9V6Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="m8.5 12 2.5 2.5 4.5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>30 dias</b>de garantia</span></li>
+        <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg><span><b>Backup por escrito</b>antes de formatar</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <svg class="virada" viewBox="0 0 1440 140" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0 64 C 260 18, 520 18, 780 52 S 1220 118, 1440 72 L1440 140 L0 140 Z" fill="#F5ECDC"/>
+  </svg>
+
+  <section class="lado-b faixa" id="lado-b" aria-labelledby="t-lado-b">
+    <div class="miolo lado-b-grade">
+      <figure style="margin:0">
+        <div class="lado-b-foto"><img src="assets/gui-dev.webp" alt="Ilustração do Gui em frente a monitores com código" width="720" height="720" loading="lazy"></div>
+        <figcaption class="lado-b-legenda">Fora da bancada, eu programo.</figcaption>
+      </figure>
+      <div>
+        <p class="etiqueta">Lado B</p>
+        <h2 id="t-lado-b">Quem abre seu notebook também escreve software<span class="ponto">.</span></h2>
+        <p class="lado-b-intro">Trabalho com inovação durante o dia e, no tempo livre, construo os meus próprios apps. Alguns deles:</p>
+        <ul class="projetos">
+          <li class="projeto">
+            <div class="preview preview-mono" aria-hidden="true">
+              <div class="tela">
+                <div class="m-topo"><b>hoje</b><span>2/3</span></div>
+                <div class="m-hab feito"><i></i>beber água</div>
+                <div class="m-hab feito"><i></i>ler 20 páginas</div>
+                <div class="m-hab"><i></i>caminhar</div>
+                <div class="m-grade"><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class="on"></i><i class="on"></i><i class="on"></i><i class=""></i><i class=""></i><i class="on"></i></div>
+              </div>
+            </div>
+            <div class="projeto-corpo">
+              <h3>mono-habits</h3>
+              <p>Rastreador de hábitos monocromático. Instala no celular como app (PWA) e funciona offline.</p>
+              <div class="tags"><span>PWA</span><span>Hábitos</span></div>
+              <a class="ir" href="https://mono-habits-kappa.vercel.app" target="_blank" rel="noopener">Abrir app →</a>
+            </div>
+          </li>
+          <li class="projeto">
+            <div class="preview preview-sinapse" aria-hidden="true">
+              <svg viewBox="0 0 320 220">
+                <g stroke="#45656C" stroke-width="2" fill="none">
+                  <path d="M160 110 L60 52"/><path d="M160 110 L260 52"/><path d="M160 110 L60 172"/><path d="M160 110 L260 172"/>
+                </g>
+                <g fill="#1F5562" stroke="#8DB3B4" stroke-width="1.5">
+                  <rect x="18" y="34" width="84" height="36" rx="18"/><rect x="218" y="34" width="84" height="36" rx="18"/>
+                  <rect x="18" y="154" width="84" height="36" rx="18"/><rect x="218" y="154" width="84" height="36" rx="18"/>
+                </g>
+                <g fill="#F5ECDC" font-family="Poppins, sans-serif" font-size="12" font-weight="600" text-anchor="middle">
+                  <text x="60" y="56">agente 1</text><text x="260" y="56">agente 2</text>
+                  <text x="60" y="176">agente 3</text><text x="260" y="176">agente 4</text>
+                </g>
+                <circle cx="160" cy="110" r="38" fill="#D1652A"/>
+                <text x="160" y="115" fill="#F5ECDC" font-family="Poppins, sans-serif" font-size="13" font-weight="800" text-anchor="middle">Sinapse</text>
+              </svg>
+            </div>
+            <div class="projeto-corpo">
+              <h3>Sinapse</h3>
+              <p>Orquestrador de agentes de IA que coordena modelos de vários provedores na mesma tarefa.</p>
+              <div class="tags"><span>IA</span><span>Multiagentes</span></div>
+              <span class="ir privado">Código privado</span>
+            </div>
+          </li>
+          <li class="projeto">
+            <div class="preview preview-guivros" aria-hidden="true">
+              <div class="janela">
+                <div class="g-topo"><b>guivros e afins</b><span>livros usados com carinho</span></div>
+                <div class="g-grade">
+                  <div><i style="background:#7A3B2E"></i><b>Sabor Amargo</b><span>R$ 45</span></div>
+                  <div><i style="background:#2F4858"></i><b>Legião</b><span>R$ 40</span></div>
+                  <div><i style="background:#C9B27C"></i><b>Sociedade do Cansaço</b><span>R$ 25</span></div>
+                  <div><i style="background:#3E5641"></i><b>Crônicas de Pai</b><span>R$ 35</span></div>
+                </div>
+              </div>
+            </div>
+            <div class="projeto-corpo">
+              <h3>guivros</h3>
+              <p>Vitrine onde eu vendo meus livros usados e alguns objetos.</p>
+              <div class="tags"><span>Loja</span><span>Livros</span></div>
+              <a class="ir" href="https://guivros.vercel.app" target="_blank" rel="noopener">Abrir app →</a>
+            </div>
+          </li>
+        </ul>
+        <a class="github" href="https://github.com/raguiohead" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 1.8a10.2 10.2 0 0 0-3.2 19.9c.5.1.7-.2.7-.5v-1.8c-2.8.6-3.4-1.3-3.4-1.3-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.6 1.1 1.6 1.1.9 1.6 2.4 1.1 3 .8.1-.7.4-1.1.6-1.4-2.3-.3-4.6-1.1-4.6-5a3.9 3.9 0 0 1 1-2.7 3.7 3.7 0 0 1 .1-2.7s.9-.3 2.8 1a9.6 9.6 0 0 1 5.1 0c1.9-1.3 2.8-1 2.8-1 .6 1.4.2 2.4.1 2.7a3.9 3.9 0 0 1 1 2.7c0 3.9-2.4 4.7-4.6 5 .4.3.7.9.7 1.9v2.8c0 .3.2.6.7.5A10.2 10.2 0 0 0 12 1.8Z"/></svg>
+          Mais no GitHub · @raguiohead
+        </a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="rodape faixa" id="contato">
+  <div class="miolo">
+    <div class="rodape-cta">
+      <h2>Deixa que eu resolvo<span class="ponto">.</span></h2>
+      <a class="botao js-whats" href="#contato" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.2a9.8 9.8 0 0 0-8.4 14.8L2.2 21.8l4.9-1.3A9.8 9.8 0 1 0 12 2.2Zm0 17.8a8 8 0 0 1-4.1-1.1l-.3-.2-2.9.8.8-2.8-.2-.3A8 8 0 1 1 12 20Zm4.4-6c-.2-.1-1.4-.7-1.7-.8-.2-.1-.4-.1-.5.1l-.8.9c-.1.2-.3.2-.5.1a6.6 6.6 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.1 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.5-.4h-.5a.9.9 0 0 0-.6.3 2.7 2.7 0 0 0-.9 2c0 1.2.9 2.3 1 2.5.1.2 1.7 2.6 4.2 3.7 1.6.7 2.2.7 3 .6.5-.1 1.4-.6 1.6-1.2.2-.6.2-1 .1-1.2l-.5-.2Z"/></svg>
+        Chamar no WhatsApp
+      </a>
+    </div>
+    <ul class="redes" aria-label="Redes">
+      <li><a href="https://instagram.com/oguiresolve" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 7.3A4.7 4.7 0 1 0 12 16.7 4.7 4.7 0 0 0 12 7.3Zm0 7.7a3 3 0 1 1 0-6 3 3 0 0 1 0 6Zm4.9-8.9a1.1 1.1 0 1 0 0 2.2 1.1 1.1 0 0 0 0-2.2ZM12 3.6c2.7 0 3 0 4.1.1 2.7.1 4 1.4 4.1 4.1.1 1.1.1 1.4.1 4.1s0 3-.1 4.1c-.1 2.7-1.4 4-4.1 4.1-1.1.1-1.4.1-4.1.1s-3 0-4.1-.1c-2.7-.1-4-1.4-4.1-4.1C3.7 15 3.6 14.7 3.6 12s0-3 .1-4.1C3.8 5.2 5.1 3.9 7.9 3.8c1.1-.1 1.4-.2 4.1-.2ZM12 2c-2.7 0-3.1 0-4.1.1C4.2 2.2 2.2 4.2 2.1 7.9 2 8.9 2 9.3 2 12s0 3.1.1 4.1c.1 3.7 2.1 5.7 5.8 5.8 1 .1 1.4.1 4.1.1s3.1 0 4.1-.1c3.7-.1 5.7-2.1 5.8-5.8.1-1 .1-1.4.1-4.1s0-3.1-.1-4.1c-.1-3.7-2.1-5.7-5.8-5.8C15.1 2 14.7 2 12 2Z"/></svg><span>@oguiresolve</span></a></li>
+      <li><a class="js-whats" href="#contato" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.2a9.8 9.8 0 0 0-8.4 14.8L2.2 21.8l4.9-1.3A9.8 9.8 0 1 0 12 2.2Zm0 17.8a8 8 0 0 1-4.1-1.1l-.3-.2-2.9.8.8-2.8-.2-.3A8 8 0 1 1 12 20Zm4.4-6c-.2-.1-1.4-.7-1.7-.8-.2-.1-.4-.1-.5.1l-.8.9c-.1.2-.3.2-.5.1a6.6 6.6 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.1 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.5-.4h-.5a.9.9 0 0 0-.6.3 2.7 2.7 0 0 0-.9 2c0 1.2.9 2.3 1 2.5.1.2 1.7 2.6 4.2 3.7 1.6.7 2.2.7 3 .6.5-.1 1.4-.6 1.6-1.2.2-.6.2-1 .1-1.2l-.5-.2Z"/></svg><span>WhatsApp</span></a></li>
+      <li><a href="https://github.com/raguiohead" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 1.8a10.2 10.2 0 0 0-3.2 19.9c.5.1.7-.2.7-.5v-1.8c-2.8.6-3.4-1.3-3.4-1.3-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.6 1.1 1.6 1.1.9 1.6 2.4 1.1 3 .8.1-.7.4-1.1.6-1.4-2.3-.3-4.6-1.1-4.6-5a3.9 3.9 0 0 1 1-2.7 3.7 3.7 0 0 1 .1-2.7s.9-.3 2.8 1a9.6 9.6 0 0 1 5.1 0c1.9-1.3 2.8-1 2.8-1 .6 1.4.2 2.4.1 2.7a3.9 3.9 0 0 1 1 2.7c0 3.9-2.4 4.7-4.6 5 .4.3.7.9.7 1.9v2.8c0 .3.2.6.7.5A10.2 10.2 0 0 0 12 1.8Z"/></svg><span>GitHub</span></a></li>
+    </ul>
+    <p class="local">Atendo em Fortaleza · CE</p>
+    <p class="assinatura">@oguiresolve</p>
+    <p class="feito">feito por <a href="https://github.com/raguiohead" target="_blank" rel="noopener">@raguiohead</a></p>
+  </div>
+</footer>
+
+<script>
+  // Número do WhatsApp: troque só aqui (DDI + DDD + número, sem espaços). Vazio = WhatsApp abre para escolher o contato.
+  const WHATSAPP = "558596414361";
+  const texto = encodeURIComponent("Oi Gui, vim pelo site");
+  const link = WHATSAPP ? `https://wa.me/${WHATSAPP}?text=${texto}` : `https://wa.me/?text=${texto}`;
+  document.querySelectorAll(".js-whats").forEach(a => { a.href = link; });
+</script>
+</body>
+</html>
